@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../../../bin/libudp.a CMakeFiles/udp.dir/udp.cpp.o
+/usr/bin/ranlib ../../../../bin/libudp.a
