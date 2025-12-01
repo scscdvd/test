@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/d/2025/C++/src/network/tcpserver/tcpserver.cpp" "src/network/tcpserver/CMakeFiles/tcpserver.dir/tcpserver.cpp.o" "gcc" "src/network/tcpserver/CMakeFiles/tcpserver.dir/tcpserver.cpp.o.d"
+  "/mnt/d/2025/test/src/network/tcpserver/tcpserver.cpp" "src/network/tcpserver/CMakeFiles/tcpserver.dir/tcpserver.cpp.o" "gcc" "src/network/tcpserver/CMakeFiles/tcpserver.dir/tcpserver.cpp.o.d"
   )
 
 # Targets to which this target links.

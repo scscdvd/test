@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/d/2025/C++
+CMAKE_SOURCE_DIR = /mnt/d/2025/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/d/2025/C++/build
+CMAKE_BINARY_DIR = /mnt/d/2025/test/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /mnt/d/2025/C++/build && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/2025/C++/build/CMakeFiles /mnt/d/2025/C++/build/src/system//CMakeFiles/progress.marks
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/2025/C++/build/CMakeFiles 0
+	cd /mnt/d/2025/test/build && $(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/2025/test/build/CMakeFiles /mnt/d/2025/test/build/src/system//CMakeFiles/progress.marks
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/2025/test/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/clean
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/preinstall
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/preinstall
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /mnt/d/2025/C++/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /mnt/d/2025/test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/system/CMakeFiles/system.dir/rule:
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/CMakeFiles/system.dir/rule
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/system/CMakeFiles/system.dir/rule
 .PHONY : src/system/CMakeFiles/system.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ system: src/system/CMakeFiles/system.dir/rule
 
 # fast build rule for target.
 system/fast:
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/build
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/build
 .PHONY : system/fast
 
 system.o: system.cpp.o
@@ -135,7 +135,7 @@ system.o: system.cpp.o
 
 # target to build an object file
 system.cpp.o:
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/system.cpp.o
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/system.cpp.o
 .PHONY : system.cpp.o
 
 system.i: system.cpp.i
@@ -143,7 +143,7 @@ system.i: system.cpp.i
 
 # target to preprocess a source file
 system.cpp.i:
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/system.cpp.i
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/system.cpp.i
 .PHONY : system.cpp.i
 
 system.s: system.cpp.s
@@ -151,7 +151,7 @@ system.s: system.cpp.s
 
 # target to generate assembly for a file
 system.cpp.s:
-	cd /mnt/d/2025/C++/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/system.cpp.s
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/system.cpp.s
 .PHONY : system.cpp.s
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /mnt/d/2025/C++/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /mnt/d/2025/test/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

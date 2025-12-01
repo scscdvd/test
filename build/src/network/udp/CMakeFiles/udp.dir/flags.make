@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/d/2025/C++/include -I/mnt/d/2025/C++/src/network/udp
+CXX_INCLUDES = -I/mnt/d/2025/test/include -I/mnt/d/2025/test/src/network/udp
 
 CXX_FLAGS = 
 

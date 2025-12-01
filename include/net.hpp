@@ -3,7 +3,14 @@
 
 #include <iostream>
 #include <atomic>
+#include <sys/types.h>          /* See NOTES */
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/tcp.h>
+#include <netdb.h>
 
+
+/*网络基类*/
 class Net
 {
 public:
@@ -26,9 +33,14 @@ public:
     {
         return running_;
     }
-    /*发送数据*/
-    virtual int sendData(const void* data,int len) = 0;
 
+    struct clientInfo
+    {
+        int socketFd_;
+        socklen_t addrLen_;
+        sockaddr_in addr_;
+    };
+    using clientInfo = struct clientInfo;
 protected:
     std::atomic<bool> running_;         /*网络是否在运行*/
 };

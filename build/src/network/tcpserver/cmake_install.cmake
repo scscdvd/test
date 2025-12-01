@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/2025/C++/src/network/tcpserver
+# Install script for directory: /mnt/d/2025/test/src/network/tcpserver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

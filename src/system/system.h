@@ -2,6 +2,8 @@
 #define _SYSTEM_H
 
 #include "tcpserver.h"
+#include "tcpclient.h"
+#include "udp.h"
 
 
 class System
@@ -33,6 +35,8 @@ private:
     ~System();
 private:
     tcpServer server_;
+    tcpClient client_;
+    UDP udp_;
 
     std::atomic<bool> running_;
 };

@@ -3,8 +3,8 @@ aux_source_directory(. SYSTEM_SRC)
 add_library(system ${SYSTEM_SRC})
 
 target_link_libraries(system
+    tcpclient    
     tcpserver
-    tcpclient
     udp  
 )
 

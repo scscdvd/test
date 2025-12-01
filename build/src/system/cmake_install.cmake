@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/2025/C++/src/system
+# Install script for directory: /mnt/d/2025/test/src/system
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
