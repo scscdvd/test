@@ -30,6 +30,8 @@ public:
     /*停止网络*/
     void stop() override;
 
+protected:
+    void udpThread();
 private:
     std::string udpIP_;              /*UDP绑定的IP*/
     unsigned short udpPort_;        /*UDP绑定的端口*/

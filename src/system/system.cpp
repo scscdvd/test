@@ -1,17 +1,23 @@
 #include "system.h"
-
+#include "global.h"
 
 System::System() : running_(false)
 {
     std::cout << "System created" << std::endl;
     
-    server_.init("0.0.0.0",9547);/*服务器监听端口*/
+    server_.init(ANY_IP,TCP_SERVER_PORT);/*服务器监听端口*/
 
-    client_.setServer("10.10.1.251",9527);/*设置要连接的服务器IP，端口*/
+    client_.setServer(SERVER_IP,SERVER_PORT);/*设置要连接的服务器IP，端口*/
 
-    udp_.setUDPPort("0.0.0.0",8888);/*设置UDP绑定的IP和端口*/
+    /*正常通信UDP*/
+    udp_.setUDPPort(ANY_IP,UDP_PORT);/*设置UDP绑定的IP和端口*/
     udp_.setMode(Mode::NORMAL);/*设置UDP工作模式*/
     udp_.init();/*初始化UDP*/
+
+    /*广播*/
+    udpBroadcast_.setUDPPort(ANY_IP,BROADCAST_PORT);/*设置UDP绑定的IP和端口*/
+    udpBroadcast_.setMode(Mode::BROADCAST);/*设置UDP工作模式*/
+    udpBroadcast_.init();/*初始化UDP*/
 }
 void System::startSystem() 
 {
@@ -28,6 +34,8 @@ void System::startSystem()
     // 启动UDP
     udp_.start();
 
+    // 启动广播UDP
+    udpBroadcast_.start();
     /*系统运行中*/
     while(isRunning())
     {
@@ -48,6 +56,8 @@ void System::stopSystem()
     client_.stop();
     //停止UDP
     udp_.stop();
+    //停止广播UDP
+    udpBroadcast_.stop();
 }
 
 System::~System()

@@ -130,6 +130,30 @@ test/fast:
 	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/test.dir/build.make src/CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+global.o: global.cpp.o
+.PHONY : global.o
+
+# target to build an object file
+global.cpp.o:
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/test.dir/build.make src/CMakeFiles/test.dir/global.cpp.o
+.PHONY : global.cpp.o
+
+global.i: global.cpp.i
+.PHONY : global.i
+
+# target to preprocess a source file
+global.cpp.i:
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/test.dir/build.make src/CMakeFiles/test.dir/global.cpp.i
+.PHONY : global.cpp.i
+
+global.s: global.cpp.s
+.PHONY : global.s
+
+# target to generate assembly for a file
+global.cpp.s:
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/test.dir/build.make src/CMakeFiles/test.dir/global.cpp.s
+.PHONY : global.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -163,6 +187,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... global.o"
+	@echo "... global.i"
+	@echo "... global.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

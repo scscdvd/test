@@ -37,6 +37,7 @@ private:
     tcpServer server_;
     tcpClient client_;
     UDP udp_;
+    UDP udpBroadcast_;
 
     std::atomic<bool> running_;
 };

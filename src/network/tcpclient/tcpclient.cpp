@@ -1,7 +1,7 @@
 #include "tcpclient.h"
 
 tcpClient::tcpClient(): socketFd_(-1),
-      serverIp_(""),
+      serverIp_(ANY_IP),
       serverPort_(0),
       isConnected_(false)
 
@@ -94,6 +94,7 @@ void tcpClient::receiveThread()
     char buffer[BUFFER_SIZE];
     while (running_ && isConnected_)
     {
+        memset(buffer, 0, BUFFER_SIZE);
         ssize_t bytesRead = recv(socketFd_, buffer, sizeof(buffer) - 1, 0);
         if (bytesRead > 0)
         {
@@ -107,6 +108,7 @@ void tcpClient::receiveThread()
             ::close(socketFd_);
             socketFd_ = -1;
         }
+        
     }
     std::cout << "Receive thread stopped" << std::endl;
 }

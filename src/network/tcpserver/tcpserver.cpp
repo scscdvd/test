@@ -3,10 +3,10 @@
 
 /****************************tcpServer*******************************/
 
-tcpServer::tcpServer() : socketFd_(-1),ip_(""), port_(0),
+tcpServer::tcpServer() : socketFd_(-1),ip_(ANY_IP), port_(0),
                                                      epollFd_(-1), exitFd_(-1)
 {
-    std::cout << "class tcpServer created" << std::endl;
+    std::cout << "tcpServer created" << std::endl;
 
 }
 /*服务器初始化*/
@@ -14,7 +14,7 @@ bool tcpServer::init(const std::string& ip ,unsigned short port)
 {
     ip_ = ip;
     port_ = port;
-    std::cout << "local all IP, Port: " << port_ << std::endl;
+    std::cout << "Port: " << port_ << std::endl;
     socketFd_ = socket(AF_INET, SOCK_STREAM, 0);
     if(socketFd_ == -1)
     {
@@ -204,6 +204,6 @@ void tcpServer::stop()
 tcpServer::~tcpServer()
 {
     stop();
-    std::cout << "class tcpServer destroyed" << std::endl;
+    std::cout << "tcpServer destroyed" << std::endl;
 }
 
