@@ -10,12 +10,12 @@
 /****************************tcpServer*******************************/
 
 tcpServer::tcpServer() : socketFd_(-1),ip_(variableManager::Instance().ANY_IP), 
-                                                port_(variableManager::Instance().TCP_SERVER_PORT),
-                                                     epollFd_(-1), exitFd_(-1)
+                                            port_(variableManager::Instance().TCP_SERVER_PORT),
+                                            epollFd_(-1), exitFd_(-1)
 {
     DEBUG << "tcpServer created" ;
-
 }
+
 /*服务器初始化*/
 bool tcpServer::init(const std::string& ip ,unsigned short port)
 {

@@ -15,7 +15,9 @@ public:
     LOG& operator<<(const char* str)
     {
         if (debugEnable)
+        {
             oss_ << (str ? str : "(null)");
+        }
         return *this;
     }
     template<class T>

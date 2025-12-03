@@ -6,6 +6,7 @@
 
 class tcpServer : public Net
 {
+
 public:
     tcpServer();
     ~tcpServer();
@@ -19,6 +20,10 @@ protected:
 
     /*服务器线程*/
     void serverThread();
+
+
+
+
 private:
     int socketFd_;    /*socket文件描述符*/
     int exitFd_;    //退出通知

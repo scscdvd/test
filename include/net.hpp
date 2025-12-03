@@ -41,6 +41,7 @@ public:
         sockaddr_in addr_;
     };
     using clientInfo = struct clientInfo;
+
 protected:
     std::atomic<bool> running_;         /*网络是否在运行*/
 };
