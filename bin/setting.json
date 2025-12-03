@@ -1,0 +1,11 @@
+{
+    "NET":{
+        "deviceIP":"10.10.1.251",
+        "netMask":"255.255.255.0",
+        "gateway":"10.10.1.2",
+        "devicePort":9527,
+        "serverIP":"10.10.1.251",
+        "serverPort":9547,
+        "udpPort": 8001
+    }
+}

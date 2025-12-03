@@ -16,6 +16,7 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/mnt/d/2025/test/build/src/network/tcpclient/CMakeFiles/tcpclient.dir/DependInfo.cmake"
   "/mnt/d/2025/test/build/src/network/tcpserver/CMakeFiles/tcpserver.dir/DependInfo.cmake"
   "/mnt/d/2025/test/build/src/network/udp/CMakeFiles/udp.dir/DependInfo.cmake"
+  "/mnt/d/2025/test/build/src/log/CMakeFiles/log.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

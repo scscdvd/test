@@ -4,6 +4,7 @@
 #include <signal.h>
 #include <iostream>
 #include "system.h"
+#include "log.h"
 
 class MySignal
 {
@@ -17,6 +18,7 @@ public:
     MySignal& operator=(const MySignal&) = delete;
     MySignal(const MySignal&) = delete;
 
+    /*注册退出信号*/
     void setupSignalHandlers()
     {
         struct sigaction sa;
@@ -31,7 +33,7 @@ public:
 
     static void signalHandle(int signum)
     {
-        std::cout << "system exit!!! " << std::endl;
+        DEBUG << "system exit!!! " ;
         System::Instance().stopSystem();
     }
 protected:

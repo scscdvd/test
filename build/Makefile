@@ -181,6 +181,19 @@ system/fast:
 	$(MAKE) $(MAKESILENT) -f src/system/CMakeFiles/system.dir/build.make src/system/CMakeFiles/system.dir/build
 .PHONY : system/fast
 
+#=============================================================================
+# Target rules for targets named log
+
+# Build rule for target.
+log: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 log
+.PHONY : log
+
+# fast build rule for target.
+log/fast:
+	$(MAKE) $(MAKESILENT) -f src/log/CMakeFiles/log.dir/build.make src/log/CMakeFiles/log.dir/build
+.PHONY : log/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,6 +202,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... log"
 	@echo "... system"
 	@echo "... tcpclient"
 	@echo "... tcpserver"

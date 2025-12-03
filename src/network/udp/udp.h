@@ -1,7 +1,9 @@
 #ifndef _UDP_H
 #define _UDP_H_
 
-#include "global.h"
+#include "global.hpp"
+#include "net.hpp"
+ #include <thread>
 
 enum class Mode
 {

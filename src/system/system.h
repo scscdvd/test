@@ -34,12 +34,12 @@ private:
     System();
     ~System();
 private:
-    tcpServer server_;
-    tcpClient client_;
-    UDP udp_;
-    UDP udpBroadcast_;
+    tcpServer server_;  /*tcpserver*/
+    tcpClient client_;  /*tcpclient*/
+    UDP udp_;           /*udp*/
+    UDP udpBroadcast_;  /*udpbroadcast*/
 
-    std::atomic<bool> running_;
+    std::atomic<bool> running_; /*运行状态*/
 };
 
 #endif

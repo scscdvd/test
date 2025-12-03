@@ -1,12 +1,15 @@
 #include "tcpclient.h"
+#include <fstream> 
+#include <unistd.h> 
+#include <cstdlib> 
 
 tcpClient::tcpClient(): socketFd_(-1),
-      serverIp_(ANY_IP),
-      serverPort_(0),
+      serverIp_(variableManager::Instance().SERVER_IP),
+      serverPort_(variableManager::Instance().SERVER_PORT),
       isConnected_(false)
 
 {
-    std::cout << "tcpClient create" << std::endl;
+    DEBUG << "tcpClient create" ;
 }
 
 
@@ -18,7 +21,7 @@ void tcpClient::start()
     }
     running_ = true;
     clientThread_ = std::thread(&tcpClient::clientThread, this);
-    std::cout << "tcpClient started" << std::endl;
+    DEBUG << "tcpClient started" ;
 }
 
 void tcpClient::setServer(const std::string& serverIp, unsigned short serverPort)
@@ -31,7 +34,7 @@ bool tcpClient::connect()
     socketFd_ = socket(AF_INET, SOCK_STREAM, 0);
     if(socketFd_ == -1)
     {
-        std::cerr << "Failed to create socket" << std::endl;
+        DEBUG << "Failed to create socket" ;
         return isConnected_;
     }
     sockaddr_in serverAddr;
@@ -46,18 +49,18 @@ bool tcpClient::connect()
 
     if(::connect(socketFd_, (sockaddr*)&serverAddr, sizeof(serverAddr)) == -1)
     {
-        std::cerr << "Failed to connect to server" << std::endl;
+        DEBUG << "Failed to connect to server";
         ::close(socketFd_);
         socketFd_ = -1;
         return isConnected_;
     }
-    std::cout << "Connected to server " << serverIp_ << ":" << serverPort_ << std::endl;
+    DEBUG << "Connected to server " << serverIp_ << ":" << serverPort_ ;
     isConnected_ = true;
     return isConnected_;
 }
 void tcpClient::clientThread()
 {
-    std::cout << "Client thread started" << std::endl;
+    DEBUG << "Client thread started" ;
     while (running_)
     {
         if(isConnected_ == false)
@@ -65,7 +68,7 @@ void tcpClient::clientThread()
             if(!connect())
             {
                  /*没有连接上*/
-                std::cout << "Retrying to connect to server..." << std::endl;
+                DEBUG << "Retrying to connect to server..." ;
                 if(socketFd_ != -1)
                 {
                     ::close(socketFd_);
@@ -76,7 +79,7 @@ void tcpClient::clientThread()
             }
             else
             {
-                std::cout << "Connection success" << std::endl;
+                DEBUG << "Connection success" ;
                 // 连接成功
                 std::thread th(&tcpClient::receiveThread,this);
                 th.detach();
@@ -85,32 +88,32 @@ void tcpClient::clientThread()
 
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-    std::cout << "Client thread stopped" << std::endl;
+    DEBUG << "Client thread stopped" ;
 }
 
 void tcpClient::receiveThread()
 {
-    std::cout << "Receive thread started" << std::endl;
-    char buffer[BUFFER_SIZE];
+    DEBUG << "Receive thread started" ;
+    char buffer[variableManager::Instance().BUFFER_SIZE];
     while (running_ && isConnected_)
     {
-        memset(buffer, 0, BUFFER_SIZE);
+        memset(buffer, 0, variableManager::Instance().BUFFER_SIZE);
         ssize_t bytesRead = recv(socketFd_, buffer, sizeof(buffer) - 1, 0);
         if (bytesRead > 0)
         {
             buffer[bytesRead] = '\0';
-            std::cout << "Received: " << buffer << std::endl;
+            DEBUG << "Received: " << buffer ;
         }
         else
         {
-            std::cout << "client disconnection" << std::endl;
+            DEBUG << "client disconnection";
             isConnected_ = false;
             ::close(socketFd_);
             socketFd_ = -1;
         }
         
     }
-    std::cout << "Receive thread stopped" << std::endl;
+    DEBUG << "Receive thread stopped";
 }
 
 void tcpClient::stop()
@@ -131,12 +134,12 @@ void tcpClient::stop()
     {
         clientThread_.join();
     }
-    std::cout << "tcpClient stopped" << std::endl;
+    DEBUG << "tcpClient stopped" ;
 }
 
 
 tcpClient::~tcpClient()
 {
     stop();
-    std::cout << "tcpClient destroy" << std::endl;
+    DEBUG << "tcpClient destroy" ;
 }

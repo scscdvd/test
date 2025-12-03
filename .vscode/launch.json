@@ -2,16 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "C/C++ Runner: std::cout Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/mnt/d/2025/C++",
-      "program": "/mnt/d/2025/C++/build/Debug/outDebug",
+      "program": "/mnt/d/2025/C++/build/std::cout/outstd::cout",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "mistd::coutgerPath": "gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

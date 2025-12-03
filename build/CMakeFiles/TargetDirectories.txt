@@ -17,3 +17,6 @@
 /mnt/d/2025/test/build/src/system/CMakeFiles/system.dir
 /mnt/d/2025/test/build/src/system/CMakeFiles/edit_cache.dir
 /mnt/d/2025/test/build/src/system/CMakeFiles/rebuild_cache.dir
+/mnt/d/2025/test/build/src/log/CMakeFiles/log.dir
+/mnt/d/2025/test/build/src/log/CMakeFiles/edit_cache.dir
+/mnt/d/2025/test/build/src/log/CMakeFiles/rebuild_cache.dir

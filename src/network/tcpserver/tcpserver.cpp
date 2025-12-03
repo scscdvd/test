@@ -1,12 +1,19 @@
 #include "tcpserver.h"
-
+ #include <thread>
+ #include <fstream> 
+#include <unistd.h> 
+#include <cstdlib> 
+#include <sys/epoll.h> 
+#include <fcntl.h> 
+#include <sys/eventfd.h>
 
 /****************************tcpServer*******************************/
 
-tcpServer::tcpServer() : socketFd_(-1),ip_(ANY_IP), port_(0),
+tcpServer::tcpServer() : socketFd_(-1),ip_(variableManager::Instance().ANY_IP), 
+                                                port_(variableManager::Instance().TCP_SERVER_PORT),
                                                      epollFd_(-1), exitFd_(-1)
 {
-    std::cout << "tcpServer created" << std::endl;
+    DEBUG << "tcpServer created" ;
 
 }
 /*服务器初始化*/
@@ -14,11 +21,11 @@ bool tcpServer::init(const std::string& ip ,unsigned short port)
 {
     ip_ = ip;
     port_ = port;
-    std::cout << "Port: " << port_ << std::endl;
+    DEBUG << "tcpserver listen port: " << port_ ;
     socketFd_ = socket(AF_INET, SOCK_STREAM, 0);
     if(socketFd_ == -1)
     {
-        std::cerr << "Failed to create socket" << std::endl;
+        DEBUG << "Failed to create socket" ;
         return false;
     }
     sockaddr_in serverAddr;
@@ -34,12 +41,12 @@ bool tcpServer::init(const std::string& ip ,unsigned short port)
 
     if(bind(socketFd_, (const sockaddr*)&serverAddr, sizeof(serverAddr)) < 0)
     {
-        std::cerr << "Bind failed" << std::endl;
+        DEBUG << "Bind failed" ;
         ::close(socketFd_);
         socketFd_ = -1;
         return false;
     }
-    listen(socketFd_, MAX_LISTEN);
+    listen(socketFd_, variableManager::Instance().MAX_LISTEN);
     return true;
 }
 /*服务器开始运行*/
@@ -47,10 +54,9 @@ void tcpServer::start()
 {
     if(running_)
     {
-        // std::cout << "tcpServer is already running" << std::endl;
         return;
     }
-    std::cout << "tcpServer started" << std::endl;
+    DEBUG << "tcpServer started" ;
     serverThread_ = std::thread(&tcpServer::serverThread , this);
     running_ = true;
 }
@@ -58,12 +64,12 @@ void tcpServer::start()
 /*epoll监听客户端连接和客户端的数据*/
 void tcpServer::serverThread()
 {
-    std::cout << "tcpServer serverThread running" << std::endl;
-    epoll_event event,events[MAX_EVENTS];
+    DEBUG << "tcpServer serverThread running";
+    epoll_event event,events[variableManager::Instance().MAX_EVENTS];
     epollFd_ = epoll_create(1);
     if(epollFd_ == -1)
     {
-        std::cerr << "epoll_create1 failed" << std::endl;
+        DEBUG << "epoll_create1 failed" ;
         return;
     }
     exitFd_ = eventfd(0,EFD_NONBLOCK);
@@ -78,7 +84,7 @@ void tcpServer::serverThread()
     event.data.fd = exitFd_;
     if(epoll_ctl(epollFd_, EPOLL_CTL_ADD, exitFd_, &event) == -1)
     {
-        std::cerr << "epoll_ctl ADD exitFd_ failed" << std::endl;
+        DEBUG << "epoll_ctl ADD exitFd_ failed" ;
         return;
     }
     /*服务器*/
@@ -86,23 +92,23 @@ void tcpServer::serverThread()
     event.data.fd = socketFd_;
     if(epoll_ctl(epollFd_, EPOLL_CTL_ADD, socketFd_, &event) == -1)
     {
-        std::cerr << "epoll_ctl ADD socketFd_ failed" << std::endl;
+        DEBUG << "epoll_ctl ADD socketFd_ failed" ;
         return;
     }
 
     while (running_)
     {
-        int ret = epoll_wait(epollFd_, events, MAX_EVENTS, -1);
+        int ret = epoll_wait(epollFd_, events, variableManager::Instance().MAX_EVENTS, -1);
         if(ret == -1)
         {
-            std::cerr << "epoll_wait failed" << std::endl;
+            DEBUG << "epoll_wait failed" ;
             break;
         }
         for(int i = 0; i < ret; ++i)
         {
             if(events[i].data.fd == exitFd_)
             {
-                std::cout << "tcpServer serverThread received exit signal" << std::endl;
+                DEBUG << "tcpServer serverThread received exit signal" ;
                 uint64_t tmp;
                 read(exitFd_,&tmp,sizeof(tmp));
                 goto exitThread;
@@ -114,37 +120,35 @@ void tcpServer::serverThread()
                 client.socketFd_ = accept(socketFd_, (sockaddr*)&client.addr_, &client.addrLen_);
                 if(client.socketFd_ == -1)
                 {
-                    std::cerr << "Accept failed" << std::endl;
+                    DEBUG << "Accept failed" ;
                     continue;
                 }
-                std::cout << "New client connected, socketFd: " << client.socketFd_ << std::endl;
-                std::cout << "Client IP: " << inet_ntoa(client.addr_.sin_addr) 
-                          << ", Port: " << ntohs(client.addr_.sin_port) << std::endl;
+                DEBUG << "New client connected, socketFd: " << client.socketFd_ ;
+                DEBUG << "Client IP: " << inet_ntoa(client.addr_.sin_addr) 
+                          << ", Port: " << ntohs(client.addr_.sin_port) ;
                 event.events = EPOLLIN | EPOLLET;
                 event.data.fd = client.socketFd_;   
                 if(epoll_ctl(epollFd_, EPOLL_CTL_ADD, client.socketFd_, &event) == -1)
                 {
-                    std::cerr << "epoll_ctl ADD client socketFd failed" << std::endl;
+                    DEBUG << "epoll_ctl ADD client socketFd failed" ;
                     ::close(client.socketFd_);
                     continue;
                 }
             }
             else
             {
-                char buffer[BUFFER_SIZE];
-                memset(buffer, 0, BUFFER_SIZE);
-                int bytesRead = read(events[i].data.fd,buffer, BUFFER_SIZE);
+                char buffer[variableManager::Instance().BUFFER_SIZE];
+                memset(buffer, 0, variableManager::Instance().BUFFER_SIZE);
+                int bytesRead = read(events[i].data.fd,buffer, variableManager::Instance().BUFFER_SIZE);
                 if(bytesRead <= 0)
                 {
-                    std::cout << "Client disconnected, socketFd: " << events[i].data.fd << std::endl;
+                    DEBUG << "Client disconnected, socketFd: " << events[i].data.fd ;
                     epoll_ctl(epollFd_, EPOLL_CTL_DEL, events[i].data.fd, NULL);
                     ::close(events[i].data.fd);
                 }
                 else
                 {
-                    // std::cout << "Received data from client :"  << std::string(buffer, bytesRead) << std::endl;
                     int len = write(events[i].data.fd, buffer, bytesRead);
-                    // std::cout << "Echoed back " << len << " bytes to client" << std::endl;
                 }
             }
         }
@@ -165,7 +169,7 @@ void tcpServer::serverThread()
         ::close(socketFd_);
         socketFd_ = -1;
     }
-    std::cout << "tcpServer serverThread exiting" << std::endl;
+    DEBUG << "tcpServer serverThread exiting" ;
 }
 /*停止服务器*/
 void tcpServer::stop()
@@ -173,7 +177,6 @@ void tcpServer::stop()
     
     if(!running_)
     {
-        // std::cout << "tcpServer is not running" << std::endl;
         return;
     }
     if(exitFd_ != -1)
@@ -197,13 +200,13 @@ void tcpServer::stop()
     {
         serverThread_.join();
     }
-    std::cout << "tcpServer stopped" << std::endl;
+    DEBUG << "tcpServer stopped" ;
     
 }
 /*服务器对象销毁*/
 tcpServer::~tcpServer()
 {
     stop();
-    std::cout << "tcpServer destroyed" << std::endl;
+    DEBUG << "tcpServer destroyed" ;
 }
 

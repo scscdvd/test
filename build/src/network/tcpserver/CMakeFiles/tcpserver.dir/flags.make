@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/d/2025/test/include -I/mnt/d/2025/test/src/network/tcpserver
+CXX_INCLUDES = -I/mnt/d/2025/test/include -I/mnt/d/2025/test/src/network/tcpserver -I/mnt/d/2025/test/src/log
 
 CXX_FLAGS = 
 

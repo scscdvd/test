@@ -1,7 +1,8 @@
 #ifndef _TCPSERVER_H
 #define _TCPSERVER_H
-#include "global.h"
-
+#include "global.hpp"
+#include "net.hpp"
+#include <thread>
 
 class tcpServer : public Net
 {

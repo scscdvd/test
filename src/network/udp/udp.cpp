@@ -1,14 +1,18 @@
 #include "udp.h"
+ #include <thread>
+ #include <fstream> 
+#include <unistd.h> 
+#include <cstdlib> 
+#include "log.h"
 
-
-UDP::UDP(): udpIP_(ANY_IP), udpPort_(0), mode_(Mode::NORMAL), udpSocketFd_(-1)
+UDP::UDP(): udpIP_(variableManager::Instance().ANY_IP), udpPort_(variableManager::Instance().UDP_PORT), mode_(Mode::NORMAL), udpSocketFd_(-1)
 {
-    std::cout << "UDP created" << std::endl;
+    DEBUG << "UDP created" ;
 }
 UDP::~UDP()
 {
     stop();
-    std::cout << "UDP destroyed" << std::endl;
+    DEBUG << "UDP destroyed" ;
 }
 void UDP::setMode(Mode mode)
 {
@@ -33,7 +37,7 @@ void UDP::init()
     udpSocketFd_ = socket(AF_INET, SOCK_DGRAM, 0);
     if(udpSocketFd_ < 0)
     {
-        std::cerr << "Failed to create UDP socket" << std::endl;
+        DEBUG << "Failed to create UDP socket" ;
         return;
     }
     sockaddr_in serverAddr;
@@ -51,12 +55,20 @@ void UDP::init()
 
     if(bind(udpSocketFd_, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0)
     {
-        std::cerr << "Failed to bind UDP socket" << std::endl;
+        DEBUG << "Failed to bind UDP socket" ;
         close(udpSocketFd_);
         udpSocketFd_ = -1;
         return;
     }
-    std::cout << "port:" << udpPort_ << std::endl;
+     if(mode_ == Mode::BROADCAST)
+    {
+        DEBUG << "udp broadcast port:" << udpPort_ ;
+    }
+    else
+    {
+        DEBUG << "udp port:" << udpPort_ ;
+    }
+    
 }
 
 void UDP::start()
@@ -67,47 +79,51 @@ void UDP::start()
     }
     running_ = true;
     UDPThread_ = std::thread(&UDP::udpThread, this);
-    std::cout << "UDP started" << std::endl;
+    DEBUG << "UDP started" ;
 }
 
 void UDP::udpThread()
 {
-    char buffer[BUFFER_SIZE];
+    char buffer[variableManager::Instance().BUFFER_SIZE];
     sockaddr_in broadcastAddr;
     clientInfo client;
     client.addrLen_ = sizeof(client.addr_);
     
     if(mode_ == Mode::BROADCAST)/*如果是广播，构建广播地址 */
     {
-        std::cout << "UDP working in BROADCAST mode" << std::endl;
+        DEBUG << "UDP working in BROADCAST mode" ;
         broadcastAddr.sin_family = AF_INET;
-        broadcastAddr.sin_addr.s_addr = inet_addr(BROADCAST_IP);
-        broadcastAddr.sin_port = htons(BROADCAST_PORT);
+        broadcastAddr.sin_addr.s_addr = inet_addr(variableManager::Instance().BROADCAST_IP);
+        broadcastAddr.sin_port = htons(variableManager::Instance().BROADCAST_PORT);
     }
 
     while (running_)
     {
-        memset(buffer, 0, BUFFER_SIZE);
-        ssize_t recvLen = recvfrom(udpSocketFd_, buffer, BUFFER_SIZE, 0,
+        memset(buffer, 0, variableManager::Instance().BUFFER_SIZE);
+        ssize_t recvLen = recvfrom(udpSocketFd_, buffer, variableManager::Instance().BUFFER_SIZE, 0,
                                     (sockaddr*)&client.addr_, &client.addrLen_);
         if (recvLen > 0)
         {
             if(mode_ == Mode::BROADCAST)/*如果是广播模式，回复广播地址*/
             {
-                std::cout << "Broadcasting UDP message to "
-                            << BROADCAST_IP << ":"
-                            << BROADCAST_PORT << " buffer:" << buffer << std::endl;
+                DEBUG << "Broadcasting UDP message to "
+                            << variableManager::Instance().BROADCAST_IP << ":"
+                            << variableManager::Instance().BROADCAST_PORT << " buffer:" << buffer;
+                if(std::string(buffer) == "what's your IP?")
+                {
+                    DEBUG << "get local IP" ;
+                }
             }
             else
             {
-                std::cout << "Replying to UDP client: "
+                DEBUG << "Replying to UDP client: "
                             << inet_ntoa(client.addr_.sin_addr) << ":"
-                            << ntohs(client.addr_.sin_port) << "buffer:" << buffer << std::endl;
+                            << ntohs(client.addr_.sin_port) << " buffer:" << buffer;
             }
         }
         else if (recvLen <= 0)
         {
-            std::cerr << "Failed to receive UDP data,exit" << std::endl;
+            DEBUG << "Socket has been closed data,exit" ;
             // Socket has been closed, exit the loop
             return;
         }
@@ -132,5 +148,5 @@ void UDP::stop()
     {
         UDPThread_.join();
     }
-    std::cout << "UDP stopped" << std::endl;
+    DEBUG << "UDP stopped" ;
 }

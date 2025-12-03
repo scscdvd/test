@@ -46,6 +46,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/mnt/d/2025/test/build/src/network/cmake_install.cmake")
   include("/mnt/d/2025/test/build/src/system/cmake_install.cmake")
+  include("/mnt/d/2025/test/build/src/log/cmake_install.cmake")
 
 endif()
 

@@ -1,7 +1,10 @@
 #ifndef _TCPCLIENT_H_
 #define _TCPCLIENT_H_
 
-#include "global.h"
+#include "global.hpp"
+#include "net.hpp"
+ #include <thread>
+
 
 class tcpClient : public Net
 {

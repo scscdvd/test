@@ -12,6 +12,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.22.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.22.1/CMakeSystem.cmake"
   "../src/CMakeLists.txt"
+  "../src/log/CMakeLists.txt"
   "../src/network/CMakeLists.txt"
   "../src/network/tcpclient/CMakeLists.txt"
   "../src/network/tcpserver/CMakeLists.txt"
@@ -53,6 +54,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "src/network/tcpserver/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/network/udp/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/system/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/log/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -62,4 +64,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "src/network/tcpserver/CMakeFiles/tcpserver.dir/DependInfo.cmake"
   "src/network/udp/CMakeFiles/udp.dir/DependInfo.cmake"
   "src/system/CMakeFiles/system.dir/DependInfo.cmake"
+  "src/log/CMakeFiles/log.dir/DependInfo.cmake"
   )
