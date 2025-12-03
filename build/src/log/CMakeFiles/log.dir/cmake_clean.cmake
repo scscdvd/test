@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "../../../bin/liblog.pdb"
   "CMakeFiles/log.dir/log.cpp.o"
   "CMakeFiles/log.dir/log.cpp.o.d"
+  "CMakeFiles/log.dir/loguru.cpp.o"
+  "CMakeFiles/log.dir/loguru.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

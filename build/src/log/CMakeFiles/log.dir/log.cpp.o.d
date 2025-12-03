@@ -261,4 +261,5 @@ src/log/CMakeFiles/log.dir/log.cpp.o: /mnt/d/2025/test/src/log/log.cpp \
  /usr/include/c++/11/bits/stl_set.h \
  /usr/include/c++/11/bits/stl_multiset.h /usr/include/c++/11/mutex \
  /usr/include/c++/11/bits/std_mutex.h \
- /usr/include/c++/11/bits/unique_lock.h /mnt/d/2025/test/src/log/log.h
+ /usr/include/c++/11/bits/unique_lock.h /mnt/d/2025/test/src/log/log.h \
+ /mnt/d/2025/test/src/log/loguru.hpp

@@ -393,7 +393,8 @@ src/CMakeFiles/test.dir/main.cpp.o: ../src/main.cpp \
   /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
   /usr/include/x86_64-linux-gnu/bits/sigthread.h \
-  /usr/include/x86_64-linux-gnu/bits/signal_ext.h
+  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+  ../src/log/loguru.hpp
 
 
 /usr/include/x86_64-linux-gnu/bits/signal_ext.h:
@@ -495,6 +496,8 @@ src/CMakeFiles/test.dir/main.cpp.o: ../src/main.cpp \
 ../include/ini.h:
 
 /usr/include/c++/11/bits/stl_numeric.h:
+
+../src/log/loguru.hpp:
 
 /usr/include/c++/11/numeric:
 

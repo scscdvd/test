@@ -261,7 +261,7 @@ src/CMakeFiles/test.dir/main.cpp.o: /mnt/d/2025/test/src/main.cpp \
  /usr/include/c++/11/bits/stl_multiset.h /usr/include/c++/11/mutex \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h /mnt/d/2025/test/src/log/log.h \
- /mnt/d/2025/test/src/system/system.h \
+ /mnt/d/2025/test/src/log/loguru.hpp /mnt/d/2025/test/src/system/system.h \
  /mnt/d/2025/test/src/network/tcpserver/tcpserver.h \
  /mnt/d/2025/test/include/net.hpp /usr/include/c++/11/atomic \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
@@ -311,4 +311,5 @@ src/CMakeFiles/test.dir/main.cpp.o: /mnt/d/2025/test/src/main.cpp \
  /usr/include/x86_64-linux-gnu/bits/ss_flags.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
- /usr/include/x86_64-linux-gnu/bits/signal_ext.h
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
+ /mnt/d/2025/test/src/log/loguru.hpp

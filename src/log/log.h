@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "loguru.hpp"
 
 class LOG
 {
@@ -30,6 +31,8 @@ public:
         return *this;
     }
     static void setDebugEnable(bool enable);   /*设置打印是否使能*/
+private:
+    static void myLog(void* user_data,const loguru::Message& message);
 
 private:
     std::ostringstream oss_;

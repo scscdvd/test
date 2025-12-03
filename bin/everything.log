@@ -1,0 +1,29 @@
+
+
+
+
+
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2025-12-03 16:25:38.752 (   0.012s) [        106F0740]             loguru.cpp:841   INFO| Logging to 'everything.log', mode: 'a', verbosity: 9
+2025-12-03 16:25:38.752 (   0.013s) [        106F0740]               main.cpp:13    INFO| I'm hungry for some 3.142!
+
+
+
+
+
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2025-12-03 16:28:08.090 (   0.000s) [        480C0740]             loguru.cpp:841   INFO| Logging to 'everything.log', mode: 'a', verbosity: 9
+2025-12-03 16:28:08.091 (   0.001s) [        480C0740]               main.cpp:13    INFO| I'm hungry for some 3.142!
+2025-12-03 16:28:08.092 (   0.002s) [        480C0740]               main.cpp:14    INFO| Version:1.0
+
+
+
+
+
+File verbosity level: 9
+date       time         ( uptime  ) [ thread name/id ]                   file:line     v| 
+2025-12-03 16:35:57.038 (   0.000s) [        34010740]             loguru.cpp:841   INFO| Logging to 'everything.log', mode: 'a', verbosity: 9
+2025-12-03 16:35:57.039 (   0.001s) [        34010740]               main.cpp:13    INFO| I'm hungry for some 3.142!
+2025-12-03 16:35:57.039 (   0.001s) [        34010740]               main.cpp:14    INFO| Version:1.0

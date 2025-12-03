@@ -154,6 +154,30 @@ log.cpp.s:
 	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/log/CMakeFiles/log.dir/build.make src/log/CMakeFiles/log.dir/log.cpp.s
 .PHONY : log.cpp.s
 
+loguru.o: loguru.cpp.o
+.PHONY : loguru.o
+
+# target to build an object file
+loguru.cpp.o:
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/log/CMakeFiles/log.dir/build.make src/log/CMakeFiles/log.dir/loguru.cpp.o
+.PHONY : loguru.cpp.o
+
+loguru.i: loguru.cpp.i
+.PHONY : loguru.i
+
+# target to preprocess a source file
+loguru.cpp.i:
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/log/CMakeFiles/log.dir/build.make src/log/CMakeFiles/log.dir/loguru.cpp.i
+.PHONY : loguru.cpp.i
+
+loguru.s: loguru.cpp.s
+.PHONY : loguru.s
+
+# target to generate assembly for a file
+loguru.cpp.s:
+	cd /mnt/d/2025/test/build && $(MAKE) $(MAKESILENT) -f src/log/CMakeFiles/log.dir/build.make src/log/CMakeFiles/log.dir/loguru.cpp.s
+.PHONY : loguru.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -166,6 +190,9 @@ help:
 	@echo "... log.o"
 	@echo "... log.i"
 	@echo "... log.s"
+	@echo "... loguru.o"
+	@echo "... loguru.i"
+	@echo "... loguru.s"
 .PHONY : help
 
 

@@ -83,17 +83,33 @@ src/log/CMakeFiles/log.dir/log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/log.dir/log.cpp.s"
 	cd /mnt/d/2025/test/build/src/log && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/2025/test/src/log/log.cpp -o CMakeFiles/log.dir/log.cpp.s
 
+src/log/CMakeFiles/log.dir/loguru.cpp.o: src/log/CMakeFiles/log.dir/flags.make
+src/log/CMakeFiles/log.dir/loguru.cpp.o: ../src/log/loguru.cpp
+src/log/CMakeFiles/log.dir/loguru.cpp.o: src/log/CMakeFiles/log.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/d/2025/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/log/CMakeFiles/log.dir/loguru.cpp.o"
+	cd /mnt/d/2025/test/build/src/log && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/log/CMakeFiles/log.dir/loguru.cpp.o -MF CMakeFiles/log.dir/loguru.cpp.o.d -o CMakeFiles/log.dir/loguru.cpp.o -c /mnt/d/2025/test/src/log/loguru.cpp
+
+src/log/CMakeFiles/log.dir/loguru.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/log.dir/loguru.cpp.i"
+	cd /mnt/d/2025/test/build/src/log && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/2025/test/src/log/loguru.cpp > CMakeFiles/log.dir/loguru.cpp.i
+
+src/log/CMakeFiles/log.dir/loguru.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/log.dir/loguru.cpp.s"
+	cd /mnt/d/2025/test/build/src/log && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/2025/test/src/log/loguru.cpp -o CMakeFiles/log.dir/loguru.cpp.s
+
 # Object files for target log
 log_OBJECTS = \
-"CMakeFiles/log.dir/log.cpp.o"
+"CMakeFiles/log.dir/log.cpp.o" \
+"CMakeFiles/log.dir/loguru.cpp.o"
 
 # External object files for target log
 log_EXTERNAL_OBJECTS =
 
 ../bin/liblog.a: src/log/CMakeFiles/log.dir/log.cpp.o
+../bin/liblog.a: src/log/CMakeFiles/log.dir/loguru.cpp.o
 ../bin/liblog.a: src/log/CMakeFiles/log.dir/build.make
 ../bin/liblog.a: src/log/CMakeFiles/log.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/d/2025/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library ../../../bin/liblog.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/d/2025/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library ../../../bin/liblog.a"
 	cd /mnt/d/2025/test/build/src/log && $(CMAKE_COMMAND) -P CMakeFiles/log.dir/cmake_clean_target.cmake
 	cd /mnt/d/2025/test/build/src/log && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/log.dir/link.txt --verbose=$(VERBOSE)
 
