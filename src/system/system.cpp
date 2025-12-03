@@ -5,7 +5,7 @@ System::System() : running_(false)
 {
     DEBUG << "System created" ;
 
-    server_.init(variableManager::Instance().ANY_IP,variableManager::Instance().TCP_SERVER_PORT);/*服务器监听端口*/
+    server_.init(variableManager::Instance().ANY_IP,variableManager::Instance().DEVICE_PORT);/*服务器监听端口*/
 
     client_.setServer(variableManager::Instance().SERVER_IP,variableManager::Instance().SERVER_PORT);/*设置要连接的服务器IP，端口*/
 

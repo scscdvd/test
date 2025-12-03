@@ -85,7 +85,7 @@ public:
     
 public:
     /*可变参数*/
-    ProxyVariable<unsigned short> TCP_SERVER_PORT = ProxyVariable<unsigned short>("NET", "DevicePort", 9547);      /*TCP服务器监听端口*/
+    ProxyVariable<unsigned short> DEVICE_PORT = ProxyVariable<unsigned short>("NET", "DevicePort", 9547);      /*TCP服务器监听端口*/
     ProxyVariable<unsigned short> SERVER_PORT = ProxyVariable<unsigned short>("NET", "ServerPort", 9527);       /*要连接的服务器的端口*/
     ProxyVariable<unsigned short> UDP_PORT = ProxyVariable<unsigned short>("NET", "UDPPort", 8001);          /*UDP端口*/
     ProxyVariable<std::string> SERVER_IP = ProxyVariable<std::string>("NET", "ServerIP", "10.10.1.251");          /*要连接的服务器的IP地址*/
@@ -116,7 +116,7 @@ private:
 
         UDP_PORT = iniReader_.Get<unsigned short>("NET", "UDPPort");
         SERVER_IP = iniReader_.Get<std::string>("NET", "ServerIP");
-        TCP_SERVER_PORT = iniReader_.Get<unsigned short>("NET", "DevicePort");
+        DEVICE_PORT = iniReader_.Get<unsigned short>("NET", "DevicePort");
         SERVER_PORT = iniReader_.Get<unsigned short>("NET", "ServerPort");
     }
 
