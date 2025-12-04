@@ -29,6 +29,8 @@ example:
 
     LOG::setDebugEnable(true);
     DEBUG_PRINT << "输出到控制台";
+
+    LOG::destory();
 */
 
 
