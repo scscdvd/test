@@ -14,8 +14,13 @@ UDP和UDP广播实现,可以进行json数据的解析和ini配置文件的解析
 DEBUG_PRINT开启打印到控制台
 LOG_INFO-LOG_WARNING-LOG_ERROR
 注意需要设置日志路径，和日志名，否则会默认输出路径和名字
+
+
+
 /*
 example:
+
+
     LOG::init(argc,argv);
     
     LOG::setLogPath(".");
