@@ -9,7 +9,8 @@ tcpClient::tcpClient(): socketFd_(-1),
       isConnected_(false)
 
 {
-    DEBUG << "tcpClient create" ;
+    DEBUG_PRINT << "tcpClient create" ;
+    LOG_INFO << "tcpClient create" ;
 }
 
 
@@ -21,7 +22,8 @@ void tcpClient::start()
     }
     running_ = true;
     clientThread_ = std::thread(&tcpClient::clientThread, this);
-    DEBUG << "tcpClient started" ;
+    DEBUG_PRINT << "tcpClient started" ;
+    LOG_INFO << "tcpClient started" ;
 }
 
 void tcpClient::setServer(const std::string& serverIp, unsigned short serverPort)
@@ -34,7 +36,8 @@ bool tcpClient::connect()
     socketFd_ = socket(AF_INET, SOCK_STREAM, 0);
     if(socketFd_ == -1)
     {
-        DEBUG << "Failed to create socket" ;
+        DEBUG_PRINT << "Failed to create socket" ;
+        LOG_ERROR << "Failed to create socket" ;
         return isConnected_;
     }
     sockaddr_in serverAddr;
@@ -49,18 +52,21 @@ bool tcpClient::connect()
 
     if(::connect(socketFd_, (sockaddr*)&serverAddr, sizeof(serverAddr)) == -1)
     {
-        DEBUG << "Failed to connect to server";
+        DEBUG_PRINT << "Failed to connect to server";
+        LOG_ERROR << "Failed to connect to server";
         ::close(socketFd_);
         socketFd_ = -1;
         return isConnected_;
     }
-    DEBUG << "Connected to server " << serverIp_ << ":" << serverPort_ ;
+    DEBUG_PRINT << "Connected to server " << serverIp_ << ":" << serverPort_ ;
+    LOG_INFO << "Connected to server " << serverIp_ << ":" << serverPort_ ;
     isConnected_ = true;
     return isConnected_;
 }
 void tcpClient::clientThread()
 {
-    DEBUG << "Client thread started" ;
+    DEBUG_PRINT << "Client thread started" ;
+    LOG_INFO << "Client thread started" ;
     while (running_)
     {
         if(isConnected_ == false)
@@ -68,7 +74,8 @@ void tcpClient::clientThread()
             if(!connect())
             {
                  /*没有连接上*/
-                DEBUG << "Retrying to connect to server..." ;
+                DEBUG_PRINT << "Retrying to connect to server..." ;
+                LOG_WARNING << "Retrying to connect to server..." ;
                 if(socketFd_ != -1)
                 {
                     ::close(socketFd_);
@@ -79,7 +86,8 @@ void tcpClient::clientThread()
             }
             else
             {
-                DEBUG << "Connection success" ;
+                DEBUG_PRINT << "Connection success" ;
+                LOG_INFO << "Connection success" ;
                 // 连接成功
                 std::thread th(&tcpClient::receiveThread,this);
                 th.detach();
@@ -88,12 +96,14 @@ void tcpClient::clientThread()
 
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
-    DEBUG << "Client thread stopped" ;
+    DEBUG_PRINT << "Client thread stopped" ;
+    LOG_INFO << "Client thread stopped" ;
 }
 
 void tcpClient::receiveThread()
 {
-    DEBUG << "Receive thread started" ;
+    DEBUG_PRINT << "Receive thread started" ;
+    LOG_INFO << "Receive thread started" ;
     char buffer[variableManager::Instance().BUFFER_SIZE];
     while (running_ && isConnected_)
     {
@@ -102,18 +112,21 @@ void tcpClient::receiveThread()
         if (bytesRead > 0)
         {
             buffer[bytesRead] = '\0';
-            DEBUG << "Received: " << buffer ;
+            DEBUG_PRINT << "Received: " << buffer ;
+            LOG_INFO << "Received: " << buffer ;
         }
         else
         {
-            DEBUG << "client disconnection";
+            DEBUG_PRINT << "client disconnection";
+            LOG_WARNING << "client disconnection";
             isConnected_ = false;
             ::close(socketFd_);
             socketFd_ = -1;
         }
         
     }
-    DEBUG << "Receive thread stopped";
+    DEBUG_PRINT << "Receive thread stopped";
+    LOG_INFO << "Receive thread stopped";
 }
 
 void tcpClient::stop()
@@ -134,12 +147,14 @@ void tcpClient::stop()
     {
         clientThread_.join();
     }
-    DEBUG << "tcpClient stopped" ;
+    DEBUG_PRINT << "tcpClient stopped" ;
+    LOG_INFO << "tcpClient stopped" ;
 }
 
 
 tcpClient::~tcpClient()
 {
     stop();
-    DEBUG << "tcpClient destroy" ;
+    DEBUG_PRINT << "tcpClient destroy" ;
+    LOG_INFO << "tcpClient destroy" ;
 }

@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/test.dir/main.cpp.o -o ../../bin/test  ../../bin/libsystem.a ../../bin/libtcpclient.a ../../bin/libtcpserver.a ../../bin/libudp.a ../../bin/liblog.a 
+/usr/bin/c++ CMakeFiles/test.dir/main.cpp.o -o ../../bin/test  -Wl,-rpath,/mnt/d/2025/test/bin ../../bin/libsystem.a ../../bin/libtcpclient.a ../../bin/libtcpserver.a ../../bin/libudp.a ../../bin/liblog.so 

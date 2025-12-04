@@ -301,18 +301,19 @@ inline INIReader::INIReader(FILE* file) {
 }
 
 inline int INIReader::ParseError() const {
-    switch (_error) {
-        case 0:
-            break;
-        case -1:
-            throw std::runtime_error("ini file not found.");
-        case -2:
-            throw std::runtime_error("memory alloc error");
-        default:
-            throw std::runtime_error("parse error on line no: " +
-                                     std::to_string(_error));
-    }
-    return 0;
+    // switch (_error) {
+    //     case 0:
+    //         break;
+    //     case -1:
+    //         throw std::runtime_error("ini file not found.");
+    //     case -2:
+    //         throw std::runtime_error("memory alloc error");
+    //     default:
+    //         throw std::runtime_error("parse error on line no: " +
+    //                                  std::to_string(_error));
+    // }
+    return _error;
+    // return 0;
 }
 
 /**

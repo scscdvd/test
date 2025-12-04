@@ -1,9 +1,11 @@
 #include "system.h"
 #include "global.hpp"
+#include "log.h"
 
 System::System() : running_(false)
 {
-    DEBUG << "System created" ;
+    DEBUG_PRINT << "System created" ;
+    LOG_INFO <<  "System start" ;
 
     server_.init(variableManager::Instance().ANY_IP,variableManager::Instance().DEVICE_PORT);/*服务器监听端口*/
 
@@ -58,10 +60,16 @@ void System::stopSystem()
     udp_.stop();
     //停止广播UDP
     udpBroadcast_.stop();
+
 }
 
 System::~System()
 {
     stopSystem();
-    DEBUG << "System destroyed" ;
+    DEBUG_PRINT << "System destroyed" ;
+    LOG_WARNING << "System stop";
+    if(LOG::logFile.is_open())
+    {
+        LOG::logFile.close();
+    }
 }

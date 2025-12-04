@@ -13,7 +13,8 @@ tcpServer::tcpServer() : socketFd_(-1),ip_(variableManager::Instance().ANY_IP),
                                             port_(variableManager::Instance().DEVICE_PORT),
                                             epollFd_(-1), exitFd_(-1)
 {
-    DEBUG << "tcpServer created" ;
+    DEBUG_PRINT << "tcpServer created" ;
+    LOG_INFO << "tcpServer created" ;
 }
 
 /*服务器初始化*/
@@ -21,11 +22,13 @@ bool tcpServer::init(const std::string& ip ,unsigned short port)
 {
     ip_ = ip;
     port_ = port;
-    DEBUG << "tcpserver listen port: " << port_ ;
+    DEBUG_PRINT << "tcpserver listen port: " << port_ ;
+    LOG_INFO << "tcpserver listen port: " << port_ ;
     socketFd_ = socket(AF_INET, SOCK_STREAM, 0);
     if(socketFd_ == -1)
     {
-        DEBUG << "Failed to create socket" ;
+        DEBUG_PRINT << "Failed to create socket" ;
+        LOG_ERROR << "Failed to create socket" ;
         return false;
     }
     sockaddr_in serverAddr;
@@ -41,7 +44,8 @@ bool tcpServer::init(const std::string& ip ,unsigned short port)
 
     if(bind(socketFd_, (const sockaddr*)&serverAddr, sizeof(serverAddr)) < 0)
     {
-        DEBUG << "Bind failed" ;
+        DEBUG_PRINT << "Bind failed" ;
+        LOG_ERROR << "Bind failed"  ;
         ::close(socketFd_);
         socketFd_ = -1;
         return false;
@@ -56,7 +60,8 @@ void tcpServer::start()
     {
         return;
     }
-    DEBUG << "tcpServer started" ;
+    DEBUG_PRINT << "tcpServer started" ;
+    LOG_INFO << "tcpServer started" ;
     serverThread_ = std::thread(&tcpServer::serverThread , this);
     running_ = true;
 }
@@ -64,12 +69,13 @@ void tcpServer::start()
 /*epoll监听客户端连接和客户端的数据*/
 void tcpServer::serverThread()
 {
-    DEBUG << "tcpServer serverThread running";
+    DEBUG_PRINT << "tcpServer serverThread running";
     epoll_event event,events[variableManager::Instance().MAX_EVENTS];
     epollFd_ = epoll_create(1);
     if(epollFd_ == -1)
     {
-        DEBUG << "epoll_create1 failed" ;
+        DEBUG_PRINT << "epoll_create1 failed" ;
+        LOG_ERROR << "epoll_create1 failed" ;
         return;
     }
     exitFd_ = eventfd(0,EFD_NONBLOCK);
@@ -84,7 +90,8 @@ void tcpServer::serverThread()
     event.data.fd = exitFd_;
     if(epoll_ctl(epollFd_, EPOLL_CTL_ADD, exitFd_, &event) == -1)
     {
-        DEBUG << "epoll_ctl ADD exitFd_ failed" ;
+        DEBUG_PRINT << "epoll_ctl ADD exitFd_ failed" ;
+        LOG_ERROR << "epoll_ctl ADD exitFd_ failed" ;
         return;
     }
     /*服务器*/
@@ -92,7 +99,8 @@ void tcpServer::serverThread()
     event.data.fd = socketFd_;
     if(epoll_ctl(epollFd_, EPOLL_CTL_ADD, socketFd_, &event) == -1)
     {
-        DEBUG << "epoll_ctl ADD socketFd_ failed" ;
+        DEBUG_PRINT << "epoll_ctl ADD socketFd_ failed" ;
+        LOG_ERROR << "epoll_ctl ADD socketFd_ failed" ;
         return;
     }
 
@@ -101,14 +109,16 @@ void tcpServer::serverThread()
         int ret = epoll_wait(epollFd_, events, variableManager::Instance().MAX_EVENTS, -1);
         if(ret == -1)
         {
-            DEBUG << "epoll_wait failed" ;
+            DEBUG_PRINT << "epoll_wait failed" ;
+            LOG_ERROR << "epoll_wait failed" ;
             break;
         }
         for(int i = 0; i < ret; ++i)
         {
             if(events[i].data.fd == exitFd_)
             {
-                DEBUG << "tcpServer serverThread received exit signal" ;
+                DEBUG_PRINT << "tcpServer serverThread received exit signal" ;
+                LOG_INFO << "tcpServer serverThread received exit signal" ;
                 uint64_t tmp;
                 read(exitFd_,&tmp,sizeof(tmp));
                 goto exitThread;
@@ -120,17 +130,22 @@ void tcpServer::serverThread()
                 client.socketFd_ = accept(socketFd_, (sockaddr*)&client.addr_, &client.addrLen_);
                 if(client.socketFd_ == -1)
                 {
-                    DEBUG << "Accept failed" ;
+                    DEBUG_PRINT << "Accept failed" ;
+                    LOG_WARNING << "Accept failed" ;
                     continue;
                 }
-                DEBUG << "New client connected, socketFd: " << client.socketFd_ ;
-                DEBUG << "Client IP: " << inet_ntoa(client.addr_.sin_addr) 
+                DEBUG_PRINT << "New client connected, socketFd: " << client.socketFd_ ;
+                DEBUG_PRINT << "Client IP: " << inet_ntoa(client.addr_.sin_addr) 
+                          << ", Port: " << ntohs(client.addr_.sin_port) ;
+                LOG_INFO << "New client connected, socketFd: " << client.socketFd_ ;
+                LOG_INFO << "Client IP: " << inet_ntoa(client.addr_.sin_addr) 
                           << ", Port: " << ntohs(client.addr_.sin_port) ;
                 event.events = EPOLLIN | EPOLLET;
                 event.data.fd = client.socketFd_;   
                 if(epoll_ctl(epollFd_, EPOLL_CTL_ADD, client.socketFd_, &event) == -1)
                 {
-                    DEBUG << "epoll_ctl ADD client socketFd failed" ;
+                    DEBUG_PRINT << "epoll_ctl ADD client socketFd failed" ;
+                    LOG_INFO << "epoll_ctl ADD client socketFd failed" ;
                     ::close(client.socketFd_);
                     continue;
                 }
@@ -142,7 +157,8 @@ void tcpServer::serverThread()
                 int bytesRead = read(events[i].data.fd,buffer, variableManager::Instance().BUFFER_SIZE);
                 if(bytesRead <= 0)
                 {
-                    DEBUG << "Client disconnected, socketFd: " << events[i].data.fd ;
+                    DEBUG_PRINT << "Client disconnected, socketFd: " << events[i].data.fd ;
+                    LOG_INFO << "Client disconnected, socketFd: " << events[i].data.fd ;
                     epoll_ctl(epollFd_, EPOLL_CTL_DEL, events[i].data.fd, NULL);
                     ::close(events[i].data.fd);
                 }
@@ -169,7 +185,8 @@ void tcpServer::serverThread()
         ::close(socketFd_);
         socketFd_ = -1;
     }
-    DEBUG << "tcpServer serverThread exiting" ;
+    DEBUG_PRINT << "tcpServer serverThread exiting" ;
+    LOG_INFO << "tcpServer serverThread exiting" ;
 }
 /*停止服务器*/
 void tcpServer::stop()
@@ -200,13 +217,14 @@ void tcpServer::stop()
     {
         serverThread_.join();
     }
-    DEBUG << "tcpServer stopped" ;
-    
+    DEBUG_PRINT << "tcpServer stopped" ;
+    LOG_INFO << "tcpServer stopped" ;
 }
 /*服务器对象销毁*/
 tcpServer::~tcpServer()
 {
     stop();
-    DEBUG << "tcpServer destroyed" ;
+    DEBUG_PRINT << "tcpServer destroyed" ;
+    LOG_INFO << "tcpServer destroyed" ;
 }
 

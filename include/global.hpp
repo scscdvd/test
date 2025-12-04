@@ -1,6 +1,6 @@
 #ifndef _GLOBAL_HPP
 #define _GLOBAL_HPP
-
+#include "log.h"
 #include <iostream> 
 #include <cstring> 
 #include "json.hpp"
@@ -8,7 +8,7 @@
 #include <string_view>
 #include <functional>
 #include <mutex>
-#include "log.h"
+
 
 
 
@@ -108,16 +108,12 @@ private:
         /*加载配置文件*/
     void load()
     {
-        if (iniReader_.ParseError() != 0) 
-        {
-            std::cerr << "Can't load '" << iniFilePath << "'\n";
-            return;
-        }
 
         UDP_PORT = iniReader_.Get<unsigned short>("NET", "UDPPort");
         SERVER_IP = iniReader_.Get<std::string>("NET", "ServerIP");
         DEVICE_PORT = iniReader_.Get<unsigned short>("NET", "DevicePort");
         SERVER_PORT = iniReader_.Get<unsigned short>("NET", "ServerPort");
+
     }
 
     /*设置回调并加载配置文件*/
@@ -132,7 +128,11 @@ private:
         {
             iniReader_.UpdateEntry(section, key, value);
         });
+
         load();
+        LOG_INFO << "ini file load success";
+
+        
     }
     ~variableManager() = default;
     

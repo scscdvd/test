@@ -96,7 +96,7 @@ test_EXTERNAL_OBJECTS =
 ../bin/test: ../bin/libtcpclient.a
 ../bin/test: ../bin/libtcpserver.a
 ../bin/test: ../bin/libudp.a
-../bin/test: ../bin/liblog.a
+../bin/test: ../bin/liblog.so
 ../bin/test: src/CMakeFiles/test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/d/2025/test/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../../bin/test"
 	cd /mnt/d/2025/test/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test.dir/link.txt --verbose=$(VERBOSE)

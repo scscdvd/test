@@ -33,7 +33,8 @@ public:
 
     static void signalHandle(int signum)
     {
-        DEBUG << "system exit!!! " ;
+        DEBUG_PRINT << "system exit!!! " ;
+        LOG_INFO << "system exit!!! " ;
         System::Instance().stopSystem();
     }
 protected:

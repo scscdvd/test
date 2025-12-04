@@ -1,0 +1,23 @@
+[2025-12-04 15:32:28.189] [info]: Received: hello world
+[2025-12-04 15:32:28.298] [info]: Received: hello world
+[2025-12-04 15:32:28.378] [info]: Received: hello world
+[2025-12-04 15:37:59.803] [info]: system exit!!! 
+[2025-12-04 15:37:59.804] [info]: system exit!!! 
+[2025-12-04 15:37:59.804] [info]: system exit!!! 
+[2025-12-04 15:37:59.804] [info]: system exit!!! 
+[2025-12-04 15:37:59.804] [info]: tcpServer serverThread received exit signal
+[2025-12-04 15:37:59.804] [info]: tcpServer serverThread exiting
+[2025-12-04 15:37:59.804] [info]: tcpServer stopped
+[2025-12-04 15:37:59.805] [info]: system exit!!! 
+[2025-12-04 15:37:59.805] [info]: system exit!!! 
+[2025-12-04 15:37:59.805] [info]: system exit!!! 
+[2025-12-04 15:37:59.806] [info]: system exit!!! 
+[2025-12-04 15:37:59.806] [info]: system exit!!! 
+[2025-12-04 15:37:59.817] [info]: system exit!!! 
+[2025-12-04 15:37:59.902] [info]: Client thread stopped
+[2025-12-04 15:37:59.903] [info]: tcpClient stopped
+[2025-12-04 15:37:59.903] [warning]: Socket has been closed data,exit
+[2025-12-04 15:37:59.903] [info]: UDP stopped
+[2025-12-04 15:37:59.904] [warning]: Socket has been closed data,exit
+[2025-12-04 15:37:59.904] [info]: UDP stopped
+[2025-12-04 15:38:00.425] [warning]: System stop

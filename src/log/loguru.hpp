@@ -1240,6 +1240,12 @@ namespace loguru
 		StreamLogger(Verbosity verbosity, const char* file, unsigned line) : _verbosity(verbosity), _file(file), _line(line) {}
 		~StreamLogger() noexcept(false);
 
+		StreamLogger& operator<<(const char* t)
+		{
+			_ss << t;
+			return *this;
+		}
+
 		template<typename T>
 		StreamLogger& operator<<(const T& t)
 		{

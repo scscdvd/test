@@ -4,19 +4,20 @@
 #include "version.h"
 #include "mysignal.hpp"
 #include "log.h"
-#include "loguru.hpp"
 
 int main(int argc, char* argv[])
 {
-    LOG_F(INFO,"Version:%s",PROJECT_VERSION);
-    LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);
     
+    LOG::init(argc,argv);
+
+    LOG_INFO <<  "Version: " << PROJECT_VERSION;
     std::cout << "Version: " << PROJECT_VERSION << std::endl;
-    // if(argc > 1 && std::string(argv[1]) == "-d")
-    // {
-    //     LOG::setDebugEnable(true);
-    // }
-    // MySignal::Instance().setupSignalHandlers();
-    // System::Instance().startSystem();
+
+    if(argc > 1 && std::string(argv[1]) == "-d")
+    {
+        LOG::setDebugEnable(true);
+    }
+    MySignal::Instance().setupSignalHandlers();
+    System::Instance().startSystem();
     return 0;
 }
