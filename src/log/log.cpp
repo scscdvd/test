@@ -30,6 +30,14 @@ void LOG::init(int argc, char* argv[])
 
     loguru::add_callback("daily_file", LOG::myLog, NULL, loguru::Verbosity_MAX);
 }
+
+void LOG::destory()
+{
+    if(logFile.is_open())
+    {
+        logFile.close();
+    }
+}
 std::string LOG::getLevel(loguru::Verbosity ver)
 {
     switch(ver)
@@ -51,10 +59,7 @@ void LOG::myLog(void* user_data, const loguru::Message& message)
     if(currentDate != nowData)  /*时间不同，说明日期改变了，又过了一天*/
     {
         currentDate = nowData;  /*更新日期*/
-        if(logFile.is_open())
-        {
-            logFile.close();
-        }  
+        destory();
         std::string fileName = logPath + "/" + fileName_ + "-" + currentDate + ".log";
         logFile.open(fileName, std::ios::app);
     }

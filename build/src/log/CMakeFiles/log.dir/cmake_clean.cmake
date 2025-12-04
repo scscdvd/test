@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../../../bin/liblog.pdb"
-  "../../../bin/liblog.so"
+  "/mnt/e/程序/test/bin/liblog.pdb"
+  "/mnt/e/程序/test/bin/liblog.so"
   "CMakeFiles/log.dir/log.cpp.o"
   "CMakeFiles/log.dir/log.cpp.o.d"
   "CMakeFiles/log.dir/loguru.cpp.o"

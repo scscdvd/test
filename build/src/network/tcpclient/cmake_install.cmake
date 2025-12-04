@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/2025/test/src/network/tcpclient
+# Install script for directory: /mnt/e/程序/test/src/network/tcpclient
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

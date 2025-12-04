@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../../../bin/libsystem.a"
-  "../../../bin/libsystem.pdb"
+  "/mnt/e/程序/test/bin/libsystem.a"
+  "/mnt/e/程序/test/bin/libsystem.pdb"
   "CMakeFiles/system.dir/system.cpp.o"
   "CMakeFiles/system.dir/system.cpp.o.d"
 )

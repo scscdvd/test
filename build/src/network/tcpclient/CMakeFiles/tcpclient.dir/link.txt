@@ -1,2 +1,2 @@
-/usr/bin/ar qc ../../../../bin/libtcpclient.a CMakeFiles/tcpclient.dir/tcpclient.cpp.o
-/usr/bin/ranlib ../../../../bin/libtcpclient.a
+/usr/bin/ar qc /mnt/e/程序/test/bin/libtcpclient.a CMakeFiles/tcpclient.dir/tcpclient.cpp.o
+/usr/bin/ranlib /mnt/e/程序/test/bin/libtcpclient.a

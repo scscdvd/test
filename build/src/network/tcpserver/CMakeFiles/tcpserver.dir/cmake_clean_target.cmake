@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "../../../../bin/libtcpserver.a"
+  "/mnt/e/程序/test/bin/libtcpserver.a"
 )

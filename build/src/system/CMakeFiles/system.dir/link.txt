@@ -1,2 +1,2 @@
-/usr/bin/ar qc ../../../bin/libsystem.a CMakeFiles/system.dir/system.cpp.o
-/usr/bin/ranlib ../../../bin/libsystem.a
+/usr/bin/ar qc /mnt/e/程序/test/bin/libsystem.a CMakeFiles/system.dir/system.cpp.o
+/usr/bin/ranlib /mnt/e/程序/test/bin/libsystem.a

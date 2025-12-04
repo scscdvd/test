@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/2025/test/src/network
+# Install script for directory: /mnt/e/程序/test/src/network
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,9 +44,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/mnt/d/2025/test/build/src/network/tcpclient/cmake_install.cmake")
-  include("/mnt/d/2025/test/build/src/network/tcpserver/cmake_install.cmake")
-  include("/mnt/d/2025/test/build/src/network/udp/cmake_install.cmake")
+  include("/mnt/e/程序/test/build/src/network/tcpclient/cmake_install.cmake")
+  include("/mnt/e/程序/test/build/src/network/tcpserver/cmake_install.cmake")
+  include("/mnt/e/程序/test/build/src/network/udp/cmake_install.cmake")
 
 endif()
 

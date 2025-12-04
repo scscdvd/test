@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "../../../../bin/libudp.a"
+  "/mnt/e/程序/test/bin/libudp.a"
 )

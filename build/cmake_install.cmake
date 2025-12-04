@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/2025/test
+# Install script for directory: /mnt/e/程序/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/mnt/d/2025/test/build/src/cmake_install.cmake")
+  include("/mnt/e/程序/test/build/src/cmake_install.cmake")
 
 endif()
 
@@ -56,5 +56,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/d/2025/test/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/e/程序/test/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

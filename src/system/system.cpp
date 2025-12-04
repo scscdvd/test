@@ -68,8 +68,5 @@ System::~System()
     stopSystem();
     DEBUG_PRINT << "System destroyed" ;
     LOG_WARNING << "System stop";
-    if(LOG::logFile.is_open())
-    {
-        LOG::logFile.close();
-    }
+    LOG::destory();
 }

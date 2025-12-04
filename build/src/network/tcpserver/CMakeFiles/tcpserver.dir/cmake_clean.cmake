@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../../../../bin/libtcpserver.a"
-  "../../../../bin/libtcpserver.pdb"
+  "/mnt/e/程序/test/bin/libtcpserver.a"
+  "/mnt/e/程序/test/bin/libtcpserver.pdb"
   "CMakeFiles/tcpserver.dir/tcpserver.cpp.o"
   "CMakeFiles/tcpserver.dir/tcpserver.cpp.o.d"
 )

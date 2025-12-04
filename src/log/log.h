@@ -47,6 +47,7 @@ public:
     }
     static void setDebugEnable(bool enable);   /*设置打印是否使能*/
     static void init(int argc, char* argv[]);/*日志初始化*/
+    static void destory();
 
 public:
     /*设置日志路径*/
